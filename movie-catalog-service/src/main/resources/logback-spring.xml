@@ -1,0 +1,23 @@
+
+<configuration>
+<statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener"/>
+  <appender name="SPLUNK" class="com.splunk.logging.HttpEventCollectorLogbackAppender">
+    <url>http://localhost:8088</url>
+    <token>b1d2a7dc-2b96-4c3b-b1e7-7e765db667e4</token>
+    <source>movie-catalog-service</source>
+    <sourcetype>logback</sourcetype>
+    <index>movie-catalog-dev</index>
+    <disableCertificateValidation>true</disableCertificateValidation>
+  </appender>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>XXX-%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+  
+  <root level="DEBUG">
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="SPLUNK"/>
+  </root>
+</configuration>
